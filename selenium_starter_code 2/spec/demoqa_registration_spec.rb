@@ -8,7 +8,10 @@ describe 'testing the demoqa registration page' do
     @first_name = Faker::Name.first_name
     @last_name = Faker::Name.last_name
     @user_name = Faker::Internet.user_name(8)
+    @password = Faker::Internet.password(8)
     @email = Faker::Internet.email
+    @phone_number = Faker::Number.number(10)
+    @marital_options = ["single","married","divorced"]
   end
 
   context 'positive paths for the registration form and register' do
@@ -33,6 +36,7 @@ describe 'testing the demoqa registration page' do
       @driver.select_marital_option("single")
       @driver.select_marital_option("married")
       @driver.select_marital_option("divorced")
+      @driver.select_marital_option(@marital_options.sample)
     end
 
     it 'should accept a hobby status selection of Dance, Reading, or Cricket' do
@@ -46,9 +50,9 @@ describe 'testing the demoqa registration page' do
     end
 
     it 'accept a new DOB' do
-      @driver.dob_day_list_select(10)
-      @driver.dob_month_list_select(10)
-      @driver.dob_year_list_select(2014)
+      @driver.dob_day_list_select(Faker::Number.between(1, 28))
+      @driver.dob_month_list_select(Faker::Number.between(1, 12))
+      @driver.dob_year_list_select(Faker::Number.between(1950, 2014))
     end
 
     it 'should accept a new country value' do
@@ -56,7 +60,7 @@ describe 'testing the demoqa registration page' do
     end
 
     it 'should accept a valid phone number' do
-      @driver.set_phone_number_field('07584135417')
+      @driver.set_phone_number_field(@phone_number)
     end
 
     it 'should accept a username' do
@@ -72,11 +76,11 @@ describe 'testing the demoqa registration page' do
     end
 
     it 'should accept a password' do
-      @driver.set_password_field('password')
+      @driver.set_password_field(@password)
     end
 
     it 'should accept a password confirmation' do
-      @driver.set_confirmation_password_field('password')
+      @driver.set_confirmation_password_field(@password)
     end
 
     it 'should click the submit button' do

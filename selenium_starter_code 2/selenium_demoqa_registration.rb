@@ -8,8 +8,8 @@ class SeleniumDemoReg
   # Page field
   FIRST_NAME_FIELD = 'first_name' # id
   LAST_NAME_FIELD = 'last_name'# id
-  MARITAL_STATUS = ['single','married','divorced']# id
-  HOBBY_STATUS = ['dance','married','cricket '] # values
+  MARITAL_STATUS = '//li[2]/div/div/input[@value='# id
+  HOBBY_STATUS = '//li[3]/div/div/input[@value=' # values
   COUNTRY_DROP_DOWN_LIST =  'dropdown_7'# id
   DOB_MONTH_DROPDOWN_LIST = "mm_date_8" # id
   DOB_DAY_DROPDOWN_LIST = "dd_date_8" # id
@@ -70,14 +70,14 @@ class SeleniumDemoReg
 
   def select_marital_option(marital_status)
     # Consider something like a case statement and check the selenium selected? method
-    @chrome_driver.find_element(:xpath, "//input[@value='#{marital_status}']").click
+    @chrome_driver.find_element(:xpath, "#{MARITAL_STATUS}'#{marital_status}']").click
   end
 
   # hobby option management - Difficulty Medium
 
   def select_hobby_option(hobby)
     # Consider something like a case statement and check the selenium selected? method
-    @chrome_driver.find_element(:xpath, "//input[@value='#{hobby}']").click
+    @chrome_driver.find_element(:xpath, "#{HOBBY_STATUS}'#{hobby}']").click
   end
 
   # Select Country - Difficulty HARD
@@ -173,7 +173,7 @@ class SeleniumDemoReg
   # registration confirmation - Difficulty Easy
 
   def click_submit
-    submit = @chrome_driver.find_element(:name, "pie_submit")
+    submit = @chrome_driver.find_element(:name, SUBMIT_BUTTON)
     submit.click
   end
 

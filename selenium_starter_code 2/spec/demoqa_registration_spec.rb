@@ -12,6 +12,10 @@ describe 'testing the demoqa registration page' do
     @email = Faker::Internet.email
     @phone_number = Faker::Number.number(10)
     @marital_options = ["single","married","divorced"]
+    @day = Faker::Number.between(1, 28)
+    @month = Faker::Number.between(1, 12)
+    @year = Faker::Number.between(1950, 2014)
+    @country = Faker::Address.country
   end
 
   context 'positive paths for the registration form and register' do
@@ -50,13 +54,14 @@ describe 'testing the demoqa registration page' do
     end
 
     it 'accept a new DOB' do
-      @driver.dob_day_list_select(Faker::Number.between(1, 28))
-      @driver.dob_month_list_select(Faker::Number.between(1, 12))
-      @driver.dob_year_list_select(Faker::Number.between(1950, 2014))
+      @driver.dob_day_list_select(@day)
+      @driver.dob_month_list_select(@month)
+      @driver.dob_year_list_select(@year)
     end
 
     it 'should accept a new country value' do
-      @driver.country_dropdown_list_select('Angola')
+      @driver.country_dropdown_list_select(@country)
+
     end
 
     it 'should accept a valid phone number' do
